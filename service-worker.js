@@ -1,7 +1,7 @@
 self.addEventListener("push", (event) => {
   let messageContent = {};
   if(event.data) {
-    messageContent = event.data.json();
+    messageContent = JSON.parse(event.data);
   }
 
   let title = messageContent.title;
