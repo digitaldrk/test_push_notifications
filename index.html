@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400italic,700italic' rel='stylesheet' type='text/css'>
+
+  <script src="main.js"></script>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="container__item landing-page-container">
+      <div class="content__wrapper">
+
+        <header class="header">
+          <!-- <div class="menu-icon header__item">
+            <span class="menu-icon__line"></span>
+          </div> -->
+
+          <h1 class="heading header__item">Web Push Notifications</h1>
+
+          <!-- <ul class="social-container header__item">
+            <li class="social__icon social__icon--fb">
+              <img src="https://s29.postimg.org/3ldyta4qb/image.png" alt="facebook">
+            </li>
+            <li class="social__icon social__icon--dr">
+              <img src="https://s29.postimg.org/vqltn8fhv/image.png" alt="dribbble">
+            </li>
+            <li class="social__icon social__icon--in">
+              <img src="https://s29.postimg.org/p1fa77u5v/image.png" alt="instagram">
+            </li>
+          </ul> -->
+        </header>
+
+        <p class="coords">26.4381° N, 81.8068° W</p>
+
+        <div class="ellipses-container">
+
+          <button class="greeting" onclick="notifyMe()">Click Me!</button>
+
+          <div class="ellipses ellipses__outer--thin">
+
+            <div class="ellipses ellipses__orbit"></div>
+
+          </div>
+
+          <div class="ellipses ellipses__outer--thick"></div>
+        </div>
+
+        <div class="scroller">
+          <p class="page-title">home</p>
+
+          <div class="timeline">
+            <span class="timeline__unit"></span>
+            <span class="timeline__unit timeline__unit--active"></span>
+            <span class="timeline__unit"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      console.log('Service Worker and Push is supported');
+
+      navigator.serviceWorker.register('service-worker.js', {
+          scope: '/'
+        })
+        .then(function(swReg) {
+          console.log('Service Worker is registered', swReg);
+          if (Notification.permission == 'default') {
+            askPermission()
+          }
+          swRegistration = swReg;
+        })
+        .catch(function(error) {
+          console.error('Service Worker Error', error);
+        });
+    } else {
+      console.warn('Push messaging is not supported');
+      pushButton.textContent = 'Push Not Supported';
+    }
+
+    function notifyMe() {
+      if (!Notification) {
+        alert('Desktop notifications not available in your browser. Try Chromium.');
+        return;
+      }
+
+      if (Notification.permission !== "granted")
+        Notification.requestPermission();
+      else {
+        var notification = new Notification('Notification title', {
+          icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+          body: "Hey there! You've been notified!",
+        });
+
+        notification.onclick = function() {
+          window.open("http://stackoverflow.com/a/13328397/1269037");
+        };
+
+      }
+
+    }
+  </script>
+</body>
+
+</html>

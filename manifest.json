@@ -1,0 +1,15 @@
+{
+  "short_name": "my-app",
+  "name": "MyApp",
+  "start_url": "/",
+  "icons": [
+  {
+    "src": "/images/my-push-logo-192x192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "landscape"
+}
