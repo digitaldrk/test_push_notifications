@@ -23,7 +23,6 @@ function subscribeUser() {
     userVisibleOnly: true,
     applicationServerKey: applicationServerKey
   }
-
   return swRegistration.pushManager.subscribe(options).then(function(subscription) {
     sendSubscriptionToBackEnd(subscription)
   }).catch(function(err) {
@@ -45,7 +44,14 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 function sendSubscriptionToBackEnd(subscription) {
-  return fetch('https://arcane-stream-87798.herokuapp.com/subscriptions', {
+  let endPoint;
+  if(window.location.href === 'https://digitaldrk.github.io') {
+    endPoint = 'https://arcane-stream-87798.herokuapp.com'
+  } else {
+    endPoint = 'http://localhost:3000/subscriptions'
+  }
+
+  return fetch(endPoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
