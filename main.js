@@ -10,6 +10,7 @@ function askPermission() {
     if (permissionResult) {
       permissionResult.then(resolve, reject);
     }
+
   }).then(function(permissionResult) {
     if (permissionResult !== 'granted') {
       throw new Error('We weren\'t granted permission.');

@@ -70,7 +70,6 @@
   <script type="text/javascript">
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       console.log('Service Worker and Push is supported');
-
       navigator.serviceWorker.register('service-worker.js')
         .then(function(swReg) {
           console.log('Service Worker is registered', swReg);
@@ -87,26 +86,24 @@
       pushButton.textContent = 'Push Not Supported';
     }
 
+    // Just the push button
     function notifyMe() {
       if (!Notification) {
         alert('Desktop notifications not available in your browser. Try Chromium.');
         return;
       }
 
-      if (Notification.permission !== "granted")
+      if (Notification.permission !== "granted") {
         Notification.requestPermission();
-      else {
+      } else {
         var notification = new Notification('Notification title', {
           icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
           body: "Hey there! You've been notified!",
         });
-
         notification.onclick = function() {
           window.open("http://stackoverflow.com/a/13328397/1269037");
         };
-
       }
-
     }
   </script>
 </body>
