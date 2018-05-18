@@ -3,6 +3,12 @@ function askPermission() {
     const permissionResult = Notification.requestPermission(function(result) {
       resolve(result);
       if (result === 'granted') {
+        var notification = new Notification('Notification title', {
+          icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+          body: "Hey there! You've been notified!",
+        });
+
+        allTheEvents(notification);
         subscribeUser();
       }
     });
@@ -70,3 +76,4 @@ function sendSubscriptionToBackEnd(subscription) {
     }
   });
 }
+ 
